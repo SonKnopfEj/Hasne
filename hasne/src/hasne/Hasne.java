@@ -178,9 +178,12 @@ public class Hasne
                  arr[v][b] = ".";
                  arr[1][b] =  "F";
                 }
+                 if(move[13][b].equals("F")){
+                 arr[v][b] = ".";
+                 arr[1][b] =  "F";
             }    
          }        
-                
+         }        
             
                    
                     
