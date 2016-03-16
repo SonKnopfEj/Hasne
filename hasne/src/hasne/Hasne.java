@@ -27,7 +27,8 @@ public class Hasne
     static String[][] arr = new String[14][14]; 
     static String[][] hasen = new String[14][14]; 
     static String[][] fuechse = new String[14][14]; 
-    static String[][] unicorns = new String [14][14]; 
+    static String[][] unicorns = new String [14][14];
+    static String[][] dead = new String[14][14];
     public static void main(String[] args) throws IOException
             
     {  
@@ -38,6 +39,9 @@ public class Hasne
         do{
             if(FrameAPI.newRound){
                 moveHasen();
+                Tot();
+                Paaren();
+                //Datei();
 
                 FrameAPI.initString(arr.length, arr);
                 FrameAPI.setPlayground();
@@ -142,7 +146,7 @@ public class Hasne
          }
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
-             
+               
              
                 if(move[v][b].equals("H")){
                     arr[v][b] = ".";
@@ -203,15 +207,70 @@ public class Hasne
          
          
      }
+     private static void Tot(){
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                dead[b][v] = arr[b][v];
+                
+                if(dead[v][b].equals("F")){
+                    if(dead[v+1][b].equals("H")){
+                        arr[v][b] = "G";
+                    }
+                    if(dead[v-1][b].equals("H")){
+                        arr[v][b] = "G";
+                    }
+                    if(dead[v][b+1].equals("H")){
+                        arr[v][b] = "G";
+                    }
+                    if(dead[v][b-1].equals("H")){
+                        arr[v][b] = "G";
+                    }
+                    
+                }
+               
+                
+                
+                
+            }     
+       }           
+     }
+     private static void Paaren(){
+          for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                dead[b][v] = arr[b][v];
+                
+                if(dead[v][b].equals("H")){
+                    if(dead[v+1][b].equals("H")){
+                        arr[v+2][b] = "H";
+                    }
+                    if(dead[v-1][b].equals("H")){
+                        arr[v-2][b] = "H";
+                    }
+                    if(dead[v][b+1].equals("H")){
+                        arr[v][b+2] = "H";
+                    }
+                    if(dead[v][b-1].equals("H")){
+                        arr[v][b-2] = "H";
+                    }
+                    
+                }
+               
+                
+                
+                
+            }     
+       }           
+         
+     }    
      private static void Datei() throws IOException {
-       FileWriter writer = new FileWriter("H:\\Hase.txt", true);
-        writer.write("E1b is Watching you");
+       FileWriter writer = new FileWriter("C:\\Hase.txt", true);
+        writer.write("LULULULULULULULULULULULULULULULLULULULULULULU");
         writer.close();
         
         
         
         
-        FileReader fr = new FileReader("H:\\Hase.txt");
+        FileReader fr = new FileReader("C:\\Hase.txt");
         BufferedReader reader = new BufferedReader(fr);
         String string1 = reader.readLine();
         while(null!=string1){
@@ -221,8 +280,10 @@ public class Hasne
            
         }
      }
+     
+}
          
-     }
+     
 
 
     
