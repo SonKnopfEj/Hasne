@@ -29,16 +29,25 @@ public class Hasne
     static String[][] fuechse = new String[14][14]; 
     static String[][] unicorns = new String [14][14];
     static String[][] dead = new String[14][14];
-    public static void main(String[] args) throws IOException
-            
-    {  
+    static String[][] special = new String[14][14];
+    public static void main(String[] args) throws IOException{  
         createSpielfeld();
         FrameAPI.initFrame();
         FrameAPI.initString(arr.length, arr);
         FrameAPI.setPlayground();
         do{
             if(FrameAPI.newRound){
-                moveHasen();
+                int o = (int) (Math.random() * 4);
+                if(o>3){
+                    moveUnicorns();
+                    moveFuechse();
+                    moveHasen();
+                }
+                else{
+                    moveHasen();
+                    moveUnicorns();
+                    moveFuechse();
+                }
                 Tot();
                 Paaren();
                 //Datei();
@@ -59,10 +68,7 @@ public class Hasne
             moveHasen();
         }
     }
-    
-    
-   
-    private static void createSpielfeld() throws IOException{ 
+     private static void createSpielfeld() throws IOException{ 
         for(int i = 0; i<arr.length; i++){
             for(int e = 0; e<arr.length; e++){
                 arr[i][e] = ".";
@@ -138,6 +144,8 @@ public class Hasne
       Ausgabe();
      }
      private static void moveHasen(){
+         int r = (int) (Math.random() * 4);
+         
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
                 move[b][v] = arr[b][v];
@@ -146,21 +154,35 @@ public class Hasne
          }
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
-               
-             
+             if(move[v][12].equals("H")){
+               arr[v][b] = ".";
+               arr[v][1] =  "H";
+                }
+             if(move[12][b].equals("H")){
+               arr[v][b] = ".";
+               arr[1][b] =  "H";
+                }
+             if(r<3){
                 if(move[v][b].equals("H")){
                     arr[v][b] = ".";
                     arr[v][b+1] = "H";
-                    
-                     
+                }
+             }
+             if(r>2){
+                if(move[v][b].equals("H")){
+                    arr[v][b] = ".";
+                    arr[v+1][b] = "H";
+                }        
                     
                 } 
-                if(move[v][12].equals("H")){
-                 arr[v][b] = ".";
-                 arr[v][1] =  "H";
-                }
+             
             }    
          }
+         
+        
+    }
+     private static void moveFuechse(){
+         int r = (int) (Math.random() * 4);
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
                 move[b][v] = arr[b][v];
@@ -169,42 +191,70 @@ public class Hasne
          }
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
-             
-             
-                if(move[v][b].equals("F")){
-                    arr[v][b] = ".";
-                    arr[v+1][b] = "F";
-                    
-                     
-                    
-                } 
                 if(move[12][b].equals("F")){
                  arr[v][b] = ".";
                  arr[1][b] =  "F";
                 }
-                 if(move[13][b].equals("F")){
+                 if(move[v][12].equals("F")){
                  arr[v][b] = ".";
-                 arr[1][b] =  "F";
-            }    
-         }        
-         }        
-            
-                   
-                    
-                            
-               
-               
+                 arr[v][1] =  "F";
+             
+             if(r<3){
+                if(move[v][b].equals("F")){
+                    arr[v][b] = ".";
+                    arr[v+1][b] = "F";
+                }    
+             } 
+             if(r>2){
+                if(move[v][b].equals("F")){
+                    arr[v][b] = ".";
+                    arr[v][b+1] = "F";
+                }    
+             }        
                     
                 
-               
-            
-        
+                
+         }        
+         }
+        }
          
-         
-        
-           
-         
-         
+     }
+     private static void moveUnicorns(){
+         int r = (int) (Math.random() * 4);
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                move[b][v] = arr[b][v];
+                
+            }
+         }
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                if(move[12][b].equals("U")){
+                 arr[v][b] = ".";
+                 arr[1][b] =  "U";
+                }
+                 if(move[v][12].equals("U")){
+                 arr[v][b] = ".";
+                 arr[v][1] =  "U";
+             
+             if(r<3){
+                if(move[v][b].equals("U")){
+                    arr[v][b] = ".";
+                    arr[v+1][b] = "U";
+                }    
+             } 
+             if(r>2){
+                if(move[v][b].equals("U")){
+                    arr[v][b] = ".";
+                    arr[v][b+1] = "U";
+                }    
+             }        
+                    
+                
+                
+         }        
+         }
+        }
          
      }
      private static void Tot(){
@@ -235,10 +285,11 @@ public class Hasne
        }           
      }
      private static void Paaren(){
+          int r = (int) (Math.random() * 2);
           for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
                 dead[b][v] = arr[b][v];
-                
+             if(r == 1){    
                 if(dead[v][b].equals("H")){
                     if(dead[v+1][b].equals("H")){
                         arr[v+2][b] = "H";
@@ -254,14 +305,59 @@ public class Hasne
                     }
                     
                 }
-               
-                
-                
-                
+             }        
             }     
        }           
+      for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                dead[b][v] = arr[b][v];
+                 
+                if(dead[v][b].equals("F")){
+                    if(dead[v+1][b].equals("F")){
+                        arr[v+2][b] = "F";
+                    }
+                    if(dead[v-1][b].equals("F")){
+                        arr[v-2][b] = "F";
+                    }
+                    if(dead[v][b+1].equals("F")){
+                        arr[v][b+2] = "F";
+                    }
+                    if(dead[v][b-1].equals("F")){
+                        arr[v][b-2] = "F";
+                    }  
+                }
+            }             
+        }              
+     } 
+     private static void UnicornSpecial(){
+         int r = (int) (Math.random() * 4);
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                special[b][v] = arr[b][v];
+                
+            }
+         }
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                if(special[v][b].equals("U")){
+                    if(special[v-1][b].equals("H")){
+                        arr[v+1][b] = "H";
+                    }
+                    if(special[v+1][b].equals("H")){
+                        arr[v-1][b] = "H";
+                    }
+                    if(special[v][b+1].equals("H")){
+                        arr[v][b-1] = "H";
+                    }
+                    if(special[v][b-1].equals("H")){
+                        arr[v][b+1] = "H";
+                    }
+                }
+                
+            }
+        }
          
-     }    
+     } 
      private static void Datei() throws IOException {
        FileWriter writer = new FileWriter("C:\\Hase.txt", true);
         writer.write("LULULULULULULULULULULULULULULULLULULULULULULU");
@@ -279,9 +375,10 @@ public class Hasne
            reader.close();
            
         }
-     }
-     
+    }
 }
+     
+
          
      
 
