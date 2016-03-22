@@ -65,9 +65,14 @@ public class Hasne
                 
             }
         } 
-        
-        
-        for(int j=0;j<arr.length-5;j++){
+         for(int j=0;j<arr.length-1;j++){
+           int x1 = (int) (Math.random() * 10); 
+            
+            arr[x1][j] = "U";
+            unicorns[x1][j] = "U"; 
+        }
+         
+        for(int j=0;j<arr.length-1;j++){
             int x1 = (int) (Math.random() * 10); 
             
             arr[x1][j] = "H";
@@ -78,20 +83,18 @@ public class Hasne
         }
         
         
-        for(int j=0;j<arr.length;j++){
+        for(int j=0;j<arr.length-1;j++){
             int x1 = (int) (Math.random() * 10);
             
             arr[x1][j] = "F";
             fuechse[x1][j] = "F";
         }
-        for(int j=0;j<arr.length;j++){
-            int x1 = (int) (Math.random() * 10); 
+       
+      
             
-            arr[x1][j] = "U";
-            unicorns[x1][j] = "U"; 
         
         
-        }
+        
          Ausgabe();
     }
      private static void Ausgabe(){
@@ -140,23 +143,38 @@ public class Hasne
                 
             }
          }
+         
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
-             
-             
-                if(move[v][b].equals("H")){
+                int r = (int) (Math.random() * 4); 
+                if(r<3){
+                 
+                    if(move[v][b].equals("F")){
                     arr[v][b] = ".";
-                    arr[v][b+1] = "H";
-                    
-                     
-                    
-                } 
-                if(move[v][12].equals("H")){
-                 arr[v][b] = ".";
-                 arr[v][1] =  "H";
+                    arr[v][b+1] = "F";
+                    }
                 }
+                
+                if(r>2){
+                     if(move[v][b].equals("F")){
+                     arr[v][b] = ".";
+                     arr[v+1][b] = "F";
+                
+                    
+               }
+               }
+                 if(move[v][12].equals("F")){
+                 arr[v][b] = ".";
+                 arr[v][0] =  "F";
+                 } 
+                 if(move[12][b].equals("F")){
+                 arr[v][b] = ".";
+                 arr[0][b] =  "F";
+                 }   
+                 
+                
             }    
-         }
+        } 
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
                 move[b][v] = arr[b][v];
@@ -165,44 +183,76 @@ public class Hasne
          }
          for(int v=0;v<14;v++){
             for(int b=0;b<14;b++){
-             
-             
-                if(move[v][b].equals("F")){
-                    arr[v][b] = ".";
-                    arr[v+1][b] = "F";
-                    
-                     
-                    
-                } 
-                if(move[12][b].equals("F")){
-                 arr[v][b] = ".";
-                 arr[1][b] =  "F";
-                }
-                 if(move[13][b].equals("F")){
-                 arr[v][b] = ".";
-                 arr[1][b] =  "F";
-            }    
-         }        
-         }        
-            
-                   
-                    
-                            
-               
-               
-                    
+              
                 
-               
-            
-        
+              
+              int r = (int) (Math.random() * 4); 
+              
+              
+              if(r<3){
+              
+                if(move[v][b].equals("H")){
+                 arr[v][b] = ".";
+                 arr[v+1][b] =  "H";
+                }
+                
+             
+            }
+            if(r>2){         
+            if(move[12][b].equals("H")){
+            arr[v][b] = ".";
+            arr[0][b+1] =  "H";
+                }  
+            }
+            if(move[v][12].equals("H")){
+            arr[v][b] = ".";
+            arr[v][0] =  "H";
+                }  
+            if(move[12][b].equals("H")){
+            arr[v][b] = ".";
+            arr[0][b] =  "H";
+                }  
+            }        
+        }for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                move[b][v] = arr[b][v];
+                
+            }
+         }
          
-         
-        
-           
-         
-         
-         
+         for(int v=0;v<14;v++){
+            for(int b=0;b<14;b++){
+                int r = (int) (Math.random() * 4); 
+                if(r<3){
+                 
+                    if(move[v][b].equals("U")){
+                    arr[v][b] = ".";
+                    arr[v][b+1] = "U";
+                    }
+                }
+                
+                if(r>2){
+                     if(move[v][b].equals("U")){
+                     arr[v][b] = ".";
+                     arr[v+1][b] = "U";
+                
+                    
+               }
+               }
+                 if(move[v][12].equals("U")){
+                 arr[v][b] = ".";
+                 arr[v][0] =  "U";
+                 } 
+                 if(move[12][b].equals("U")){
+                 arr[v][b] = ".";
+                 arr[0][b] =  "U";
+                 }   
+                 
+                
+            }    
+        }         
      }
+    
      private static void Datei() throws IOException {
        FileWriter writer = new FileWriter("H:\\Hase.txt", true);
         writer.write("E1b is Watching you");
